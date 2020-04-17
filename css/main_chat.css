@@ -1,0 +1,116 @@
+#btmbar{
+	background:#222222;
+}
+.error_message{
+	color:#990000;
+}
+#submit_chat{
+	width: 211px;
+	border: 1px solid #eeeeee;
+	border-top:0 none;
+	border-radius:0;
+	padding:3px 0 3px 3px;
+	margin-left: 1px;
+	cursor:pointer;
+}
+#submit_chat:hover{
+	color:#666666;
+}
+.mainchatboxtextarea {
+	width: 206px;
+	max-height:44px;
+	padding:3px 0pt 3px 3px;
+	border: 1px solid #eeeeee;
+	border-bottom:0 none;
+	border-radius:0;
+	margin: 1px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	resize:none;
+}
+
+       .close_chat {
+	background:#222222;
+	cursor:pointer;
+	border:0 none;
+	height:15px;
+	padding-bottom:8px;
+	color:#ffffff;
+       }
+       .close_chat:hover{
+	background:#444444;
+       }
+#friendslist {
+	background-color:#D8DFEA;
+	border:0 none;
+	height:20px;
+	cursor:pointer;
+	color:#000000;
+	padding:5px;
+	height:15px;
+       }
+#friendslist:hover{
+	background-color:#EFF2F7;
+       }
+       #BARfrndlist {
+       bottom:25px;
+       right:5px;
+       position:fixed;
+       background:none;
+       width:157px;
+       }
+       #BARwindow1 {
+       bottom:25px;
+       right:215px;
+       position:fixed;
+       background:none;
+       width:175px;
+       font-family:helvetica, arial, geneva, sans-serif;
+       font-size:10px; color: black;
+       }
+       #BARwindow2 {
+       bottom:25px;
+       right:450px;
+       position:fixed;
+       background:none;
+       width:175px;
+       font-family:helvetica, arial, geneva, sans-serif;
+       font-size:10px; color: black;
+       }
+       #BARfriends {
+	background:#222222;
+	border:0 none;
+	width:156px;
+	padding-bottom:10px;
+	color:#ffffff;
+       }
+       #BARfriends:hover{
+	background:#444444;
+       }
+.chatboxtextarea {
+    border: 1px solid #222222;
+    font-family: arial,sans-serif;
+    font-size: 13px;
+    height: 44px;
+    overflow: hidden;
+    padding: 2px;
+    resize: none;
+}
+       .chtbx {
+	background:#222222;
+	border:0 none;
+	width:175px;
+	padding-bottom:8px;
+	color:#ffffff;
+       }
+       .chtbx:hover{
+	background:#444444;
+       }
+	.nohover_chat{
+	background-color:#D8DFEA;
+	border:0 none;
+	height:20px;
+	color:#000000;
+	padding:5px;
+	height:15px;
+       }

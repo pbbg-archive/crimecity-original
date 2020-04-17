@@ -1,0 +1,59 @@
+#noteBox {
+    -moz-box-sizing: border-box;
+    background-color: #F3F3F3;
+    line-height: 20px;
+    margin: 8px 0 5px;
+    padding: 5px;
+    text-align: left;
+    width: 90%;
+}
+.propWrapper {
+    background-color: #EFEFEF;
+    border: 1px solid #888888;
+    margin: 0;
+    position: relative;
+    width: 100%;
+}
+.propTitle, .propPrice {
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    width: 100%;
+}
+.propTitle {
+    background-color: #2D2D2D;
+    color: #FFFFFF;
+}
+.propPrice {
+    background-color: #F3F3F3;
+    border-top: 1px solid #888888;
+}
+#inline:hover {
+    text-decoration: none;
+    background:#AABBCC;
+}
+.propWrapper img {
+    height: 99px;
+    width: 150px;
+}
+.iframe, .buyButton {
+    background: -moz-linear-gradient(100% 100% 90deg, #B7B7B7, #DDDDDD) repeat scroll 0 0 transparent;
+    border: 1px solid #B0B0B0;
+    border-radius: 3px 3px 3px 3px;
+    color: #333333;
+    display: inline-block;
+    font-family: helvetica,arial,geneva,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 3px;
+    padding: 3px 7px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+.iframe:hover, .buyButton:hover {
+    border: 1px solid #818181;
+    text-decoration: none;
+}

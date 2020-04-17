@@ -1,0 +1,62 @@
+.mainContainer {
+}
+.memText {
+    -moz-box-sizing: border-box;
+    background: url("/images/competitions/overlay.png") repeat scroll 0 0 transparent;
+    border: 1px solid #DFDFDF;
+    height: 259px;
+    left: 8px;
+    overflow: auto;
+    padding: 5px;
+    position: relative;
+    top: 7px;
+    width: 330px;
+}
+.memTable {
+    margin: 0 auto;
+    max-width: 1070px;
+    overflow: auto;
+    width: 100%;
+}
+.memHeader {
+    background-color: #2D2D2D;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 2px;
+    font-weight:bold;
+    cursor:pointer;
+    padding: 0 8px;
+}
+.memHeader:hover{
+	color:#222222;
+	background-color:#8D8D8D;
+}
+#turfwars {
+    background: url("/images/competitions/turf_wars.jpg");
+}
+#hidenseek {
+    background: url("/images/competitions/hidenseek.jpg");
+}
+.memContent{
+    border-radius: 5px 5px 5px 5px;
+    display: inline-block;
+    height: 300px;
+    margin: 0 4px 10px;
+    padding-bottom: 2px;
+    text-align: left;
+    vertical-align: top;
+    width: 346px;
+}
+#main_table{
+	color:#ffffff;
+	font-weight:bold;
+}
+#main_table:hover {
+    background-color:#D9D9D9;
+    cursor:pointer;
+    color:#222222;
+    margin: 18px;
+}

@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, #mainNavigation, #mainNavigation ul {margin:0; padding:0;font-size: 12px; font-family: helvetica, arial, geneva, sans-serif;}
+
+#mainNavigation {clear:left;float:left; width:192px;}
+{
+	/*IE width fix */
+  w\idth: 200px;
+}
+
+#mainNavigation ul {margin:10px;}
+#mainNavigation ul li {list-style:none;}
+
+.hide {display:none; visibility:hidden;}
+.fleft {float:left;}
+.fright {float:right;}
+.b {font-weight:bold;}
+.barPad {padding:1px 0px;}
+.neg {color:#C00;}
+.pos {color:#060;}
+
+#player-stats {color:#3C3C3D; text-shadow:1px 1px 0 #FFFFFF; font-size: 12px; background-color: #F3F3F4; padding:3px 5px; border: 1px solid #999999; -webkit-border-radius: 2px; -moz-border-radius: 2px; -webkit-background-clip: padding-box; border-radius: 2px; outline: none; position: relative; zoom: 1; *display: inline; }
+#player-stats table tr td {}
+#player-stats table tr td.leftcol {width:48px;}
+#player-stats table tr td.icons {width:162px;}
+
+#player-stats table tr td.icons img {margin-bottom:3px;}
+.stats-bar-container {background-color:white; width:158px; height:6px; border:1px solid #999;}
+
+.stats-bar-fill {height:6px;}
+.energybar {background: #1cbd13  url(/images/sidebar/energybar1.png) 0 0 repeat-x;}
+.happybar {background: #1179c0  url(/images/sidebar/happybar1.png) 0 0 repeat-x;}
+.nervebar {background: #b6230e  url(/images/sidebar/nervebar1.png) 0 0 repeat-x;}
+.rightcol {text-align:right; color:#999}
+.chainbar {background: #000  url(/images/sidebar/chainbar1.png) 0 0 repeat-x;}
+#chainupdates {margin:0;padding:0; border:1px solid #000;}
+
+a.button, span.title, .menuFooter {width:160px; display: inline-block; padding: 3px 5px 3px 5px; font-size: 12px; color: #3C3C3D; text-shadow: nonr; background: #ECECEC url('/images/css3buttons_backgrounds.png') 0 0 no-repeat; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #bbbbbb; -webkit-border-radius: 2px; -moz-border-radius: 2px; -webkit-background-clip: padding-box; border-radius: 2px; outline: none; position: relative; zoom: 1; *display: inline; }
+.menuFooter {cursor: default; background: #FFF;}
+* html a.button, * html span.title, * html .menuFooter
+{
+	/*IE width fix */
+  w\idth: 172px;
+}
+a.button:visited {color: #3C3C3D}						
+span.title {cursor:default; color:#FFFFFF; background-position: 0 -280px; background-color: #2c2c2c; text-shadow: none; border: 1px solid #000;}
+a.button.primary { font-weight: bold }
+
+/*~~~~~~~~~~~ MENU button's ~~~~~~~~~~~~*/
+a.button:hover {color: #FFFFFF; border-color: #999999; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -200px; background-color: #b8b8b8; }
+a.button:active,
+a.button.active { background-position: 0 -240px; border-color: #878787; background-color: #606060; color: #FFFFFF; text-shadow: none; }
+a.button:active {color: #FFFFFF;  top: 1px }
+
+a.button.positive:hover { color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5; }
+a.button.positive:active,
+a.button.positive.active { background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none; }
+
+a.button.redd {   background-position: 0 -161px; background-color: #A5211E; border-color: #911D1B; }
+a.button.redd:hover {   color: #FFFFFF; background-position: 0 -121px; background-color: #D84743; border-color: #911D1B; }
+a.button.redd:active   ,
+a.button.redd.active { background-position: 0 -161px; background-color: #A5211E; border-color: #911D1B;#3C3C3D }
+
+a.button.blue {   background-position: 0 -41px; background-color: #A5211E; border-color: #911D1B; }
+a.button.blue:hover {   color: #FFFFFF; background-position: 0 -90px; background-color: #D84743; border-color: #911D1B; }
+a.button.blue:active   ,
+a.button.blue.active { background-position: 0 -41px; background-color: #A5211E; border-color: #911D1B; }
+
+a.button.action {background-position: 0 -360px;color:#3C3C3D; background-color: #D8ECD5; border-color: #9FBD9D; }
+a.button.action:hover {text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -321px; background-color: #94bf8e; border-color: #7b9a76; }
+a.button.action:visited{#3C3C3D}
+a.button.action:active,
+a.button.action.active { background-position: 0 -360px; background-color: #a3ca9d; border-color: #90bc89; }
+
+ 

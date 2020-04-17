@@ -1,0 +1,13 @@
+.album_dp{
+	border:1px solid #222222;
+}
+.album_dp:hover{
+	border:1px solid #ffffff;
+}
+.album_name{
+	color:#333333;
+	text-decoration:none;
+}
+.album_name:hover{
+	text-decoration:underline;
+}

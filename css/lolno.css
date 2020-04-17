@@ -1,0 +1,42 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, #mainNavigation, #mainNavigation ul {margin:0; padding:0;font-size: 12px; font-family: helvetica, arial, geneva, sans-serif;}
+
+#mainNavigation {clear:left;float:left; width:192px;}
+{
+	/*IE width fix */
+  w\idth: 200px;
+}
+
+#mainNavigation ul {margin:10px;}
+#mainNavigation ul li {list-style:none;}
+
+.hide {display:none; visibility:hidden;}
+.fleft {float:left;}
+.fright {float:right;}
+.b {font-weight:bold;}
+.barPad {padding:1px 0px;}
+.neg {color:#C00;}
+.pos {color:#060;}
+
+#player-stats {color:#3C3C3D; text-shadow:1px 1px 0 #FFFFFF; font-size: 12px; background-color: #F3F3F4; padding:3px 5px; border: 1px solid #999999; -webkit-border-radius: 2px; -moz-border-radius: 2px; -webkit-background-clip: padding-box; border-radius: 2px; outline: none; position: relative; zoom: 1; *display: inline; }
+#player-stats table tr td {}
+#player-stats table tr td.leftcol {width:48px;}
+#player-stats table tr td.icons {width:162px;}
+
+#player-stats table tr td.icons img {margin-bottom:3px;}
+.stats-bar-container {background-color:white; width:158px; height:6px; border:1px solid #999;}
+
+.stats-bar-fill {height:6px;}
+.energybar {background: #1cbd13  url(/images/sidebar/energybar1.png) 0 0 repeat-x;}
+.happybar {background: #1179c0  url(/images/sidebar/happybar1.png) 0 0 repeat-x;}
+.nervebar {background: #b6230e  url(/images/sidebar/nervebar1.png) 0 0 repeat-x;}
+.rightcol {text-align:right; color:#999}
+.chainbar {background: #000  url(/images/sidebar/chainbar1.png) 0 0 repeat-x;}
+#chainupdates {margin:0;padding:0; border:1px solid #000;}
+ 
+}
+ 
+
+ 
