@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 class DB
 {
-    const HOST = 'localhost';
-    const NAME = 'crime';
-    const USER = 'root';
-    const PASS = '';
-    const CHAR = 'utf8';
-
     protected static ?PDO $instance = null;
 
     protected function __construct() {}
@@ -24,8 +18,8 @@ class DB
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => FALSE,
             );
-            $dsn = 'mysql:host='.DB::HOST.';dbname='.DB::NAME.';charset='.DB::CHAR;
-            self::$instance = new PDO($dsn, DB::USER, DB::PASS, $opt);
+            $dsn = 'mysql:host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_NAME'].';charset='.$_ENV['DB_CHAR'];
+            self::$instance = new PDO($dsn, $_ENV['DB_USER'], $_ENV['DB_PASS'], $opt);
         }
         return self::$instance;
     }

@@ -2,9 +2,13 @@
     "autoload": {
         "classmap": [
             "src/"
+        ],
+        "files": [
+            "src/start.php"
         ]
     },
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "vlucas/phpdotenv": "^4.1"
     }
 }
