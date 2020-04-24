@@ -374,10 +374,10 @@ function Get_Max_Exp($L){
 
 
 
-class User_Stats {
-
-    function User_Stats($wutever){
-
+class User_Stats
+{
+    function __construct($wutever)
+    {
         $result = DB::run("SELECT * FROM `grpgusers` ORDER BY `username` ASC");
 
         $result3 = DB::run("SELECT * FROM `grpgusers` ORDER BY `username` ASC");
@@ -418,14 +418,10 @@ class User_Stats {
 
 }
 
-
-
-
-
-class Gang{
-
-    function Gang($id) {
-
+class Gang
+{
+    function __construct($id)
+    {
         $result = DB::run("SELECT * FROM `gangs` WHERE `id`='$id'");
 
         $worked = $result->fetch();
@@ -466,16 +462,10 @@ class Gang{
 
 }
 
-
-
-
-
-
-
-class User {
-
-    function User($id) {
-
+class User
+{
+    function __construct($id)
+    {
         $worked = DB::run("SELECT * FROM `grpgusers` WHERE `id`=?",[$id])->fetch();
 
 
