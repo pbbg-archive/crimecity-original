@@ -1,8 +1,8 @@
 <?php
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'crimecity_crime');
-define('DB_USER', 'crimecity_crime');
-define('DB_PASS', 'LeahBate17!');
+define('DB_NAME', 'crime');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 define('DB_CHAR', 'utf8');
 
 class DB
@@ -41,5 +41,18 @@ class DB
         $stmt = self::instance()->prepare($sql);
         $stmt->execute($args);
         return $stmt;
+    }
+    public static function escape_mysql($field){
+        return "`".str_replace("`", "``", $field)."`";
+    }
+    public static function insert($table, $data){
+        $keys = array_keys($data);
+        //$keys = array_map(array(self::instance(),'escape_mysql'), $keys);
+        $fields = implode(",", $keys);
+        //$table = self::instance()->escape_mysql($table);
+        $placeholders = str_repeat('?,', count($keys) - 1) . '?';
+        $sql = "INSERT INTO $table ($fields) VALUES ($placeholders)";
+        self::instance()->prepare($sql)->execute(array_values($data));
+        
     }
 }
