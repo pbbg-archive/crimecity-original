@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-include 'dbcon.php';
+require_once '../vendor/autoload.php';
 
 include 'classes.php';
 

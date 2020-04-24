@@ -1,5 +1,5 @@
 <?php
-include 'dbcon.php';
+require_once '../vendor/autoload.php';
 
 $result = DB::run("SELECT * FROM `stocks`");
 while($line = $result->fetch(PDO::FETCH_ASSOC)) {

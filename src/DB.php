@@ -1,13 +1,16 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'crime');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_CHAR', 'utf8');
+
+declare(strict_types=1);
 
 class DB
 {
-    protected static $instance = null;
+    const HOST = 'localhost';
+    const NAME = 'crime';
+    const USER = 'root';
+    const PASS = '';
+    const CHAR = 'utf8';
+
+    protected static ?PDO $instance = null;
 
     protected function __construct() {}
     protected function __clone() {}
@@ -21,8 +24,8 @@ class DB
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => FALSE,
             );
-            $dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset='.DB_CHAR;
-            self::$instance = new PDO($dsn, DB_USER, DB_PASS, $opt);
+            $dsn = 'mysql:host='.DB::HOST.';dbname='.DB::NAME.';charset='.DB::CHAR;
+            self::$instance = new PDO($dsn, DB::USER, DB::PASS, $opt);
         }
         return self::$instance;
     }
@@ -42,10 +45,14 @@ class DB
         $stmt->execute($args);
         return $stmt;
     }
-    public static function escape_mysql($field){
+
+    public static function escape_mysql($field)
+    {
         return "`".str_replace("`", "``", $field)."`";
     }
-    public static function insert($table, $data){
+
+    public static function insert($table, $data)
+    {
         $keys = array_keys($data);
         //$keys = array_map(array(self::instance(),'escape_mysql'), $keys);
         $fields = implode(",", $keys);
@@ -53,6 +60,5 @@ class DB
         $placeholders = str_repeat('?,', count($keys) - 1) . '?';
         $sql = "INSERT INTO $table ($fields) VALUES ($placeholders)";
         self::instance()->prepare($sql)->execute(array_values($data));
-        
     }
 }

@@ -1,5 +1,5 @@
 <?php
-include 'dbcon.php';
+require_once '../vendor/autoload.php';
 $result= DB::run("SELECT * FROM `carlot` WHERE `id` = '".$_GET['id']."'");
 $worked= $result->fetch();
 ?>		

@@ -1,5 +1,5 @@
 <?php
-include 'dbcon.php';
+require_once '../vendor/autoload.php';
 
 $result = DB::run("SELECT * FROM `inventory` ORDER BY `userid` DESC");
 $howmanytotal = $result->rowCount();

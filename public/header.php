@@ -1,32 +1,13 @@
 <?php
 error_reporting(E_ALL);
+require_once '../vendor/autoload.php';
 
-/*
-$color[0] = "#333";
-$color[1] = "#ddd";
-$color[2] = "#444";
-$color[3] = "#ffffff";
-$color[4] = "#111";
-$color[5] = "#000000";
-$color[6] = "#666666"; 
-$color[7] = "#FFFF00";
-$color[8] = "#1E1E1E";
-$color[9] = "#ffcc00";
-$color[10] = "#4d75a0";
-$color[11] = "#7d9fc4";
-$color[12] = "#FFFF33";
-*/
 session_start();
 
 if (!isset($_SESSION['id'])) {
-
     include('home.php');
-
     die();
-
 }
-
-include 'dbcon.php';
 
 include 'classes.php';
 

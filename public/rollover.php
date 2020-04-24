@@ -1,5 +1,5 @@
 <?php
-include 'dbcon.php';
+require_once '../vendor/autoload.php';
 include 'classes.php';
 
 $resultgrow = DB::run("SELECT * FROM `growing`");

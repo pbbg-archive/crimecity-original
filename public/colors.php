@@ -1,5 +1,5 @@
 <?php
-include 'dbcon.php';
+require_once '../vendor/autoload.php';
 if ($_POST['submit']){
 	$result = DB::run("UPDATE `styles` SET `value`='".$_POST['newcolor']."' WHERE `style`='2' AND `colornum`='".$_POST['colornum']."'");
 }
