@@ -2,12 +2,14 @@
 include 'nliheader.php';
 
 if (isset($_POST['submit'])) {
-
-    $username = strip_tags($_POST["newname"]);
+    $username = array_key_exists('newname', $_POST) && is_string($_POST['newname']) ? strip_tags(trim($_POST['newname'])) : null;
+    $password = array_key_exists('newpass', $_POST) && is_string($_POST['newpass']) ? strip_tags(trim($_POST['newpass'])) : null;
+    $password2 = array_key_exists('newpassagain', $_POST) && is_string($_POST['newpassagain']) ? strip_tags(trim($_POST['newpassagain'])) : null;
+    $referer = array_key_exists('referer', $_POST) && is_string($_POST['referer']) ? strip_tags(trim($_POST['referer'])) : null;
+   
+    $email = array_key_exists('email', $_POST) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ? $_POST['email'] : null;
+		
     $signuptime = time();
-    $password = $_POST["newpass"];
-    $password2 = $_POST["newpassagain"];
-    $email = $_POST["email"];
     $checkuser = DB::run("SELECT * FROM `grpgusers` WHERE `username`='$username'");
 
     $username_exist = $checkuser->rowCount();
@@ -26,19 +28,16 @@ if (isset($_POST['submit'])) {
     if($password != $password2){
         $message .= "<div>Your passwords don't match. Please try again.</div>";
     }
-//    if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email)) {
-//        $message .= "<div>The e-mail address you entered was invalid.</div>";
-//    }
+    if (empty($email)) {
+			  $message .= 'You didn\'t enter a valid email address';
+		}	
 
     //insert the values
     if (!isset($message)){
-        $result= DB::run("INSERT INTO `grpgusers` (ip, username, password, email, signuptime, lastactive)".
-            "VALUES ('".$_SERVER['REMOTE_ADDR']."', '$username', '$password', '$email', '$signuptime', '$signuptime')");
+        DB::insert('grpgusers', ['ip' => $_SERVER['REMOTE_ADDR'], 'username' => $username, 'password' => $password, 'email' => $email, 'signuptime' => $signuptime, 'lastactive' => $signuptime]);
         echo Message('Your account has been created successfully! Redirecting to login page in 5 seconds. <meta http-equiv="refresh" content="5;url=index.php">');
-
-        if ($_POST['referer'] != ""){
-            $result= DB::run("INSERT INTO `referrals` (`when`, `referrer`, `referred`)".
-                "VALUES ('$signuptime', '".$_POST['referer']."', '".$username."')");
+          if ($referer){
+            DB::insert('referrals', ['when' => $signuptime, 'referrer' => $referer, 'referred' => $username]);
         }
 
         die();
