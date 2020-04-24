@@ -340,40 +340,6 @@ function Get_The_Level($exp) {
 
 }
 
-
-
-function Get_Max_Exp($L){
-
-    $end=0;
-
-    if ($exp == 0){
-
-        return 457;
-
-        $end =1;
-
-    }
-
-    for($L=1;($L<100 && $end==0);$L++) {
-
-        $exp = experience($L);
-
-        //echo $exp;
-
-        if ($exp >= $user_class->exp){
-
-            return $exp;
-
-            $end=1;
-
-        }
-
-    }
-
-}
-
-
-
 class User_Stats
 {
     function __construct($wutever)
@@ -754,13 +720,6 @@ class User
     }
 
 }
-
-
-$worked2 = DB::run("SELECT * FROM `gangs` WHERE `id` =?", [$gang])->fetch();
-
-$gangname = $worked2['name'];
-
-$gangleader = $worked2['leader'];
 
 ?>
 
