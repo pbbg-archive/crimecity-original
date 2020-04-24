@@ -33,7 +33,7 @@ include 'classes.php';
 include 'updates.php';
 
 
-if ($_GET['action'] == "logout") {
+if (isset($_GET['action']) && $_GET['action'] == "logout") {
 
     session_destroy();
 
@@ -67,7 +67,6 @@ if (Is_User_Banned($_SESSION['id']) == 1) {
 }
 
 $user_class = new User($_SESSION['id']);
-$profile_class = new User($_GET['id']);
 
 // get style info
 $cresult = DB::run("SELECT `value` FROM `styles` WHERE `style`='" . $user_class->style . "'");
@@ -83,7 +82,7 @@ if ($worked['serverdown'] != "" && $user_class->admin != 1) {
     die("<h1><font color='red'>SERVER DOWN<br><br>" . $worked['serverdown'] . "</font></h1>");
 }
 
-$time = date(F . " " . d . ", " . Y . " " . g . ":" . i . ":" . sa, time());
+$time = date('F d, Y g:i:sa', time());
 
 $result = DB::run("UPDATE `grpgusers` SET `lastactive` = '" . time() . "', `ip` = '" . $_SERVER['REMOTE_ADDR'] . "' WHERE `id`='" . $_SESSION['id'] . "'");
 

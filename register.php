@@ -12,6 +12,8 @@ if (isset($_POST['submit'])) {
 
     $username_exist = $checkuser->rowCount();
 
+    $message = null;
+
     if($username_exist > 0){
         $message .= "<div>I'm sorry but the username you chose has already been taken.  Please pick another one.</div>";
     }

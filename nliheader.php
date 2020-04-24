@@ -1,6 +1,8 @@
 <?php
 //error_reporting ('E_ALL & ~E_NOTICE');
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 include 'dbcon.php';
 

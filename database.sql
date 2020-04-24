@@ -259,54 +259,60 @@ CREATE TABLE `growing` (
 -- Table structure for table `grpgusers`
 --
 
-CREATE TABLE `grpgusers` (
-  `id` int(10) NOT NULL,
-  `username` varchar(75) NOT NULL DEFAULT '',
-  `password` varchar(75) NOT NULL DEFAULT '',
-  `exp` int(30) NOT NULL DEFAULT '0',
-  `money` int(30) NOT NULL DEFAULT '1000',
-  `bank` int(30) NOT NULL DEFAULT '0',
-  `whichbank` int(2) NOT NULL DEFAULT '0',
-  `hp` int(10) NOT NULL DEFAULT '50',
-  `energy` int(10) NOT NULL DEFAULT '10',
-  `nerve` int(10) NOT NULL DEFAULT '5',
-  `workexp` int(10) NOT NULL DEFAULT '0',
-  `strength` int(10) NOT NULL DEFAULT '10',
-  `defense` int(10) NOT NULL DEFAULT '10',
-  `speed` int(10) NOT NULL DEFAULT '10',
-  `battlewon` int(10) NOT NULL DEFAULT '0',
-  `battlelost` int(10) NOT NULL DEFAULT '0',
-  `battlemoney` int(20) NOT NULL DEFAULT '0',
-  `crimesucceeded` int(10) NOT NULL DEFAULT '0',
-  `crimefailed` int(10) NOT NULL DEFAULT '0',
-  `crimemoney` int(20) NOT NULL DEFAULT '0',
-  `points` bigint(20) NOT NULL DEFAULT '0',
-  `rmdays` tinyint(5) NOT NULL DEFAULT '0',
-  `signuptime` int(20) NOT NULL DEFAULT '0',
-  `lastactive` int(20) NOT NULL DEFAULT '0',
-  `awake` int(5) NOT NULL DEFAULT '100',
-  `email` varchar(75) NOT NULL DEFAULT '',
-  `jail` int(1) NOT NULL DEFAULT '0',
-  `hospital` int(1) NOT NULL DEFAULT '0',
-  `hwho` varchar(30) DEFAULT NULL,
-  `hwhen` varchar(30) DEFAULT NULL,
-  `hhow` varchar(30) DEFAULT NULL,
-  `house` int(3) NOT NULL DEFAULT '0',
-  `gang` int(10) NOT NULL DEFAULT '0',
-  `quote` text,
-  `avatar` varchar(50) DEFAULT NULL,
-  `city` int(3) NOT NULL DEFAULT '1',
-  `admin` int(1) NOT NULL DEFAULT '0',
-  `searchdowntown` int(3) NOT NULL DEFAULT '100',
-  `job` int(5) DEFAULT NULL,
-  `ip` varchar(20) NOT NULL DEFAULT '0.0.0.0',
-  `eqweapon` int(20) DEFAULT NULL,
-  `eqarmor` int(20) DEFAULT NULL,
-  `potseeds` int(20) DEFAULT NULL,
-  `marijuana` int(20) DEFAULT NULL,
-  `cocaine` int(20) DEFAULT NULL,
-  `style` int(3) DEFAULT NULL
+CREATE TABLE `grpgusers`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `username` varchar(75) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `password` varchar(75) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `exp` int(30) NOT NULL DEFAULT 0,
+  `money` int(30) NOT NULL DEFAULT 1000,
+  `bank` int(30) NOT NULL DEFAULT 0,
+  `whichbank` int(2) NOT NULL DEFAULT 0,
+  `hp` int(11) NOT NULL DEFAULT 50,
+  `energy` int(10) NOT NULL DEFAULT 10,
+  `nerve` int(10) NOT NULL DEFAULT 5,
+  `workexp` int(10) NOT NULL DEFAULT 0,
+  `strength` int(10) NOT NULL DEFAULT 10,
+  `defense` int(10) NOT NULL DEFAULT 10,
+  `speed` int(10) NOT NULL DEFAULT 10,
+  `battlewon` int(10) NOT NULL DEFAULT 0,
+  `battlelost` int(10) NOT NULL DEFAULT 0,
+  `battlemoney` int(20) NOT NULL DEFAULT 0,
+  `crimesucceeded` int(10) NOT NULL DEFAULT 0,
+  `crimefailed` int(10) NOT NULL DEFAULT 0,
+  `crimemoney` int(20) NOT NULL DEFAULT 0,
+  `points` bigint(20) NOT NULL DEFAULT 0,
+  `rmdays` tinyint(5) NOT NULL DEFAULT 0,
+  `signuptime` int(20) NOT NULL DEFAULT 0,
+  `lastactive` int(20) NOT NULL DEFAULT 0,
+  `awake` int(5) NOT NULL DEFAULT 100,
+  `email` varchar(75) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `jail` int(1) NOT NULL DEFAULT 0,
+  `hospital` int(1) NOT NULL DEFAULT 0,
+  `hwho` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `hwhen` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `hhow` varchar(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `house` int(3) NOT NULL DEFAULT 0,
+  `gang` int(10) NOT NULL DEFAULT 0,
+  `quote` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `avatar` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `city` int(3) NOT NULL DEFAULT 1,
+  `admin` int(1) NOT NULL DEFAULT 0,
+  `searchdowntown` int(3) NOT NULL DEFAULT 100,
+  `job` int(5) NULL DEFAULT NULL,
+  `ip` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '0.0.0.0',
+  `eqweapon` int(20) NULL DEFAULT NULL,
+  `eqarmor` int(20) NULL DEFAULT NULL,
+  `potseeds` int(11) NULL DEFAULT 0,
+  `marijuana` int(11) NULL DEFAULT 0,
+  `cocaine` int(11) NULL DEFAULT 0,
+  `style` int(3) NULL DEFAULT NULL,
+  `nodoze` int(11) NULL DEFAULT 0,
+  `genericsteroids` int(11) NULL DEFAULT 0,
+  `hookers` int(11) NULL DEFAULT 0,
+  `credits` int(11) NULL DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 -- --------------------------------------------------------
 
@@ -777,12 +783,6 @@ ALTER TABLE `gangs`
 -- Indexes for table `growing`
 --
 ALTER TABLE `growing`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `grpgusers`
---
-ALTER TABLE `grpgusers`
   ADD PRIMARY KEY (`id`);
 
 --
