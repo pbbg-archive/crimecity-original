@@ -342,89 +342,69 @@ function Get_The_Level($exp) {
 
 class User_Stats
 {
+    public int $playersloggedin = 0;
+    public int $playersonlineinlastday = 0;
+    public int $playerstotal;
+
     function __construct($wutever)
     {
         $result = DB::run("SELECT * FROM `grpgusers` ORDER BY `username` ASC");
 
-        $result3 = DB::run("SELECT * FROM `grpgusers` ORDER BY `username` ASC");
-
-
-
         while($line = $result->fetch(PDO::FETCH_LAZY)) {
 
-            $secondsago = time()-$line['lastactive'];
+            $secondsago = time() - $line['lastactive'];
 
-            if ($secondsago<=300) {
-
+            if ($secondsago <= 300) {
                 $this->playersloggedin++;
-
             }
-
         }
 
-
+        $result3 = DB::run("SELECT * FROM `grpgusers` ORDER BY `username` ASC");
 
         while($line3 = $result3->fetch(PDO::FETCH_ASSOC)) {
 
-            $secondsago = time()-$line3['lastactive'];
+            $secondsago = time() - $line3['lastactive'];
 
-            if ($secondsago<=86400) {
-
+            if ($secondsago <= 86400) {
                 $this->playersonlineinlastday++;
-
             }
-
         }
 
         $result2 = DB::run("SELECT * FROM `grpgusers`");
-
         $this->playerstotal = $result2->rowCount();
-
     }
-
 }
 
 class Gang
 {
+    public int $id;
+    public int $members;
+    public string $name;
+    public string $formattedname;
+    public ?string $description;
+    public string $leader;
+    public string $tag;
+    public int $exp;
+    public int $level;
+    public int $vault;
+
     function __construct($id)
     {
         $result = DB::run("SELECT * FROM `gangs` WHERE `id`='$id'");
-
         $worked = $result->fetch();
-
         $gangcheck = DB::run("SELECT * FROM `grpgusers` WHERE `gang`= ?",[$id]);
 
-
-
         $this->id = $worked['id'];
-
         $this->members = $gangcheck->rowCount();
-
         $this->name = $worked['name'];
-
         $this->formattedname = "<a href='viewgang.php?id=".$worked['id']."'>".$worked['name']."</a>";
-
         $this->description = $worked['description'];
-
         $this->leader = $worked['leader'];
-
         $this->tag = $worked['tag'];
-
         $this->exp = $worked['exp'];
-
         $this->level = Get_The_Level($this->exp);
-
         $this->vault = $worked['vault'];
-
-        $gangcheck = DB::run("SELECT * FROM `grpgusers` WHERE `gang`='".$line['id']."'");
-
-        $members = $gangcheck->rowCount();
-
-
-
     }
-
-
 
 }
 
