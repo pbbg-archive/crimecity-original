@@ -1,48 +1,42 @@
 <?php
-error_reporting(E_ALL);
 include 'nliheader.php';
 
-
-if(isset($_POST['submit'])){
-
-
-    $username = $_POST["username"];
-
-    $password = $_POST["password"];
-
-    $result = DB::run("SELECT * FROM `grpgusers` WHERE `username`='$username'");// or die ("Name and password not found or not matched");
-    $worked = $result->fetch();
-
-    $user_class = new User($worked['id']);
-
-    if($worked['password'] == $password){
-
-        if($user_class->rmdays > 0){
-
-            echo '<meta http-equiv="refresh" content="0;url=index.php">';
-
-        } else {
-
-            ?>
-echo '<meta http-equiv="refresh" content="0;url=index.php">';
-
-            
-            <?php
-
-        }
-
-        $_SESSION["id"] = $worked['id'];
-
-        die();
-
-    } else {
-
-        echo Message('Sorry, your username and password combination are invalid.');
-
+$message = array();
+if (isset($_POST['submit']))
+{
+    $username = array_key_exists('username', $_POST) && is_string($_POST['username']) ? strip_tags(trim($_POST['username'])) : null;
+    $password = array_key_exists('password', $_POST) && is_string($_POST['password']) ? strip_tags(trim($_POST['password'])) : null;
+    if (empty($username))
+    {
+        $message[] = 'You didn\'t enter your username';
+    }
+    if (empty($password))
+    {
+        $message[] = 'You didn\'t enter your password';
     }
 
-}
+    $sql = DB::prepare('SELECT username, id, password FROM grpgusers WHERE LOWER(username) = :username');
+    $sql->bindParam(':username', $username);
+    $sql->execute();
+    if (!$sql->rowCount())
+    {
+        $message[] = 'That account wasn\'t found';
+    }
+    else
+    {
+        $row = $sql->fetch();
+        if (!password_verify($password, $row['password']))
+        {
+            $message[] = 'That account wasn\'t found';
+        }
+    }
 
+    if (!count($message))
+    {
+        $_SESSION['id'] = $row['id'];
+        exit(header('Location: index.php'));
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,6 +92,12 @@ echo '<meta http-equiv="refresh" content="0;url=index.php">';
   </div>
 </nav>
 	<div class="container-fluid">
+  <?php
+if (count($message))
+{
+    echo '<div class="alert alert-warning text-center" role="alert">' . implode('<br />', $message) . '</div>';
+}
+?>
     	<div class="main_logo"><a href="home.php"><img src="images/logo.png"></a></div><!--main_logo-->
         <div class="row">
         	<div class="col-md-6">
