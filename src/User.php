@@ -8,11 +8,11 @@ class User
     public string $username;
     public string $formattedname = '';
 
-    public int $eqweapon;
+    public int $eqweapon = 0;
     public string $weaponname = "fists";
     public string $weaponimg;
 
-    public int $eqarmor;
+    public int $eqarmor = 0;
     public string $armorname;
     public string $armorimg;
 
@@ -105,7 +105,7 @@ class User
     public ?string $gangleader;
     public string $gangtag;
     public string $gangdescription;
-    public string $formattedgang;
+    public string $formattedgang = '';
 
     public int $city;
     public string $cityname;

@@ -1,12 +1,14 @@
 <?php
 include 'header.php';
-if ($_GET['use'] == 14){ //if they are trying to use an awake pill
-	$result = DB::run("SELECT * FROM `inventory` WHERE `userid`='".$user_class->id."' AND `itemid`='14'");
+// if they are trying to use an awake pill
+if (isset($_GET['use']) && $_GET['use'] == 14) {
+	$result = DB::run("SELECT * FROM `inventory` WHERE `userid`= ? AND `itemid`= 14", [$user_class->id]);
 	$howmany = $result->rowCount();
 
 	if ($howmany > 0) {
-		$result = DB::run("UPDATE `grpgusers` SET `awake` = '".$user_class->maxawake."' WHERE `id`='".$_SESSION['id']."'");
-		Take_Item(14, $user_class->id);//take away an awake pill
+		$result = DB::run("UPDATE `grpgusers` SET `awake` = ? WHERE `id` = ?", [$user_class->maxawake, $_SESSION['id']]);
+        // take away an awake pill
+		Take_Item(14, $user_class->id);
 		echo Message("You popped an awake pill.");
 	}
 }
@@ -18,7 +20,7 @@ if ($_GET['use'] == 14){ //if they are trying to use an awake pill
 <table width='100%'>
 	<tr>
 		<td width='50%' align='center'>
-		<?php if ($user_class->eqweapon != 0){?>
+		<?php if ($user_class->eqweapon != 0) {?>
 			<img src='<?= $user_class->weaponimg ?>' width='100' height='100' style='border: 1px solid #333333'><br>
 			<?= item_popup($user_class->weaponname, $user_class->eqweapon) ?><br>
 			<a href='equip.php?unequip=weapon'>[Unequip]</a>
@@ -28,7 +30,7 @@ if ($_GET['use'] == 14){ //if they are trying to use an awake pill
 		?>
 		</td>
 		<td width='50%' align='center'>
-		<?php if ($user_class->eqarmor != 0){?>
+		<?php if ($user_class->eqarmor != 0) {?>
 			<img src='<?= $user_class->armorimg ?>' width='100' height='100' style='border: 1px solid #333333'><br>
 			<?= item_popup($user_class->armorname, $user_class->eqarmor) ?><br>
 			<a href='equip.php?unequip=armor'>[Unequip]</a>
@@ -41,58 +43,63 @@ if ($_GET['use'] == 14){ //if they are trying to use an awake pill
 </table>
 </td></tr>
 <?php
-$result = DB::run("SELECT * FROM `inventory` WHERE `userid` = '".$user_class->id."' ORDER BY `userid` DESC");
+$result = DB::run("SELECT * FROM `inventory` WHERE `userid` = ? ORDER BY `userid` DESC", [$user_class->id]);
 
-	while($line = $result->fetch(PDO::FETCH_ASSOC)) {
-	$result2 = DB::run("SELECT * FROM `items` WHERE `id`='".$line['itemid']."'");
+$weapons = null;
+$armor = null;
+$misc = null;
+$drugs = null;
+
+while ($line = $result->fetch(PDO::FETCH_ASSOC)) {
+    $result2 = DB::run("SELECT * FROM `items` WHERE `id` = ?", [$line['itemid']]);
     $worked2 = $result2->fetch();
 
-		if ($worked2['offense'] > 0){
-		$sell = ($worked2['cost'] > 0) ? "<a href='sellitem.php?id=".$worked2['id']."'>[Sell]</a>" : "";
-		$weapons .= "
+    if ($worked2['offense'] > 0) {
+        $sell = ($worked2['cost'] > 0) ? "<a href='sellitem.php?id=".$worked2['id']."'>[Sell]</a>" : "";
+        $weapons .= "
+   
+            <td width='25%' align='center'>
+    
+            <img src='". $worked2['image']."' width='100' height='100' style='border: 1px solid #333333'><br>
+            ". item_popup($worked2['itemname'], $worked2['id']) ." [x".$line['quantity']."]<br>
+            $". $worked2['cost'] ."<br>
+            $sell <a href='putonmarket.php?id=".$worked2['id']."'>[Market]</a> <a href='senditem.php?id=".$worked2['id']."'>[Send]</a> <a href='equip.php?eq=weapon&id=".$worked2['id']."'>[Equip]</a>
+            </td>
+            ";
+    }
 
-		<td width='25%' align='center'>
+    if ($worked2['defense'] > 0) {
+        $sell = ($worked2['cost'] > 0) ? "<a href='sellitem.php?id=".$worked2['id']."'>[Sell]</a>" : "";
+        $armor .= "
+    
+            <td width='25%' align='center'>
+    
+            <img src='". $worked2['image']."' width='100' height='100' style='border: 1px solid #333333'><br>
+            ". item_popup($worked2['itemname'], $worked2['id']) ." [x".$line['quantity']."]<br>
+            $". $worked2['cost'] ."<br>
+            $sell <a href='putonmarket.php?id=".$worked2['id']."'>[Market]</a> <a href='senditem.php?id=".$worked2['id']."'>[Send]</a> <a href='equip.php?eq=armor&id=".$worked2['id']."'>[Equip]</a>
+            </td>
+            ";
+    }
 
-		<img src='". $worked2['image']."' width='100' height='100' style='border: 1px solid #333333'><br>
-		". item_popup($worked2['itemname'], $worked2['id']) ." [x".$line['quantity']."]<br>
-		$". $worked2['cost'] ."<br>
-		$sell <a href='putonmarket.php?id=".$worked2['id']."'>[Market]</a> <a href='senditem.php?id=".$worked2['id']."'>[Send]</a> <a href='equip.php?eq=weapon&id=".$worked2['id']."'>[Equip]</a>
-		</td>
-		";
-		}
+    if ($worked2['id'] == 14) {
+        $misc .= "
+    
+            <td width='25%' align='center'>
+    
+            <img src='". $worked2['image']."' width='100' height='100' style='border: 1px solid #333333'><br>
+            ". $worked2['itemname'] ." [x".$line['quantity']."]<br>
+            <a href='inventory.php?use=14'>[Use]</a> <a href='putonmarket.php?id=".$worked2['id']."'>[Market]</a> <a href='senditem.php?id=".$worked2['id']."'>[Send]</a>
+            </td>
+            ";
+    }
+}
 
-		if ($worked2['defense'] > 0){
-		$sell = ($worked2['cost'] > 0) ? "<a href='sellitem.php?id=".$worked2['id']."'>[Sell]</a>" : "";
-		$armor .= "
-
-		<td width='25%' align='center'>
-
-		<img src='". $worked2['image']."' width='100' height='100' style='border: 1px solid #333333'><br>
-		". item_popup($worked2['itemname'], $worked2['id']) ." [x".$line['quantity']."]<br>
-		$". $worked2['cost'] ."<br>
-		$sell <a href='putonmarket.php?id=".$worked2['id']."'>[Market]</a> <a href='senditem.php?id=".$worked2['id']."'>[Send]</a> <a href='equip.php?eq=armor&id=".$worked2['id']."'>[Equip]</a>
-		</td>
-		";
-		}
-
-		if ($worked2['id'] == 14){
-		$misc .= "
-
-		<td width='25%' align='center'>
-
-		<img src='". $worked2['image']."' width='100' height='100' style='border: 1px solid #333333'><br>
-		". $worked2['itemname'] ." [x".$line['quantity']."]<br>
-		<a href='inventory.php?use=14'>[Use]</a> <a href='putonmarket.php?id=".$worked2['id']."'>[Market]</a> <a href='senditem.php?id=".$worked2['id']."'>[Send]</a>
-		</td>
-		";
-		}
-	}
+        //check for drugs
+if ($user_class->cocaine != 0) {
+    $drugs .= "
 	
-//check for drugs
-		if ($user_class->cocaine != 0){
-			$drugs .= "
-	
-			<td width='25%' align='center'>
+		<td width='25%' align='center'>
 	
 			<img src='images/noimage.png' width='100' height='100' style='border: 1px solid #333333'><br>
 			Cocaine [x".$user_class->cocaine."]<br>
@@ -100,9 +107,9 @@ $result = DB::run("SELECT * FROM `inventory` WHERE `userid` = '".$user_class->id
 			<a href='drugs.php?use=cocaine'>[Use]</a>
 			</td>
 			";
-		}
-		if ($user_class->nodoze != 0){
-			$drugs .= "
+}
+if ($user_class->nodoze != 0) {
+    $drugs .= "
 	
 			<td width='25%' align='center'>
 	
@@ -112,9 +119,9 @@ $result = DB::run("SELECT * FROM `inventory` WHERE `userid` = '".$user_class->id
 			<a href='drugs.php?use=nodoze'>[Use]</a>
 			</td>
 			";
-		}
-		if ($user_class->genericsteroids != 0){
-			$drugs .= "
+}
+if ($user_class->genericsteroids != 0) {
+    $drugs .= "
 	
 			<td width='25%' align='center'>
 
@@ -124,9 +131,9 @@ $result = DB::run("SELECT * FROM `inventory` WHERE `userid` = '".$user_class->id
 			<a href='drugs.php?use=genericsteroids'>[Use]</a>
 			</td>
 			";
-		}
+}
 //check for drugs
-if ($weapons != ""){
+if ($weapons) {
  ?>
 <tr><td class="contenthead">Weapons</td></tr>
 <tr><td class="contentcontent">
@@ -138,7 +145,7 @@ if ($weapons != ""){
 </td></tr>
 <?php
 }
-if ($armor != ""){
+if ($armor) {
  ?>
 <tr><td class="contenthead">Armor</td></tr>
 <tr><td class="contentcontent">
@@ -151,8 +158,7 @@ if ($armor != ""){
 <?php
 }
 
-
-if ($misc != ""){
+if ($misc) {
  ?>
 <tr><td class="contenthead">Misc.</td></tr>
 <tr><td class="contentcontent">
@@ -165,7 +171,7 @@ if ($misc != ""){
 <?php
 }
 
-if ($drugs != ""){
+if ($drugs) {
  ?>
 <tr><td class="contenthead">Drugs</td></tr>
 <tr><td class="contentcontent">
