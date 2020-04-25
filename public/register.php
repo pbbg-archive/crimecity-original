@@ -34,6 +34,7 @@ if (isset($_POST['submit'])) {
 
     //insert the values
     if (!isset($message)){
+      $password = password_hash($password, PASSWORD_BCRYPT);
         DB::insert('grpgusers', ['ip' => $_SERVER['REMOTE_ADDR'], 'username' => $username, 'password' => $password, 'email' => $email, 'signuptime' => $signuptime, 'lastactive' => $signuptime]);
         echo Message('Your account has been created successfully! Redirecting to login page in 5 seconds. <meta http-equiv="refresh" content="5;url=index.php">');
           if ($referer){
@@ -125,8 +126,7 @@ if (isset($message)) {
             <!--login_field-->
                     
         
-                
-            
+  
                 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
