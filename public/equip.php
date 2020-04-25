@@ -19,7 +19,7 @@ if (isset($_GET['unequip']) && $_GET['unequip'] == "armor" && $user_class->eqarm
 	die();
 }	
 
-if (isset($_GET['id']) && $_GET['id'] == "") {
+if (!isset($_GET['id']) || isset($_GET['id']) && $_GET['id'] == "") {
 	echo Message("No item picked.");
 	include 'footer.php';
 	die();
