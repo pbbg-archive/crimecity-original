@@ -1,6 +1,6 @@
 <?php
 include 'nliheader.php';
-
+$message = array();
 if (isset($_POST['submit'])) {
     $username = array_key_exists('newname', $_POST) && is_string($_POST['newname']) ? strip_tags(trim($_POST['newname'])) : null;
     $password = array_key_exists('newpass', $_POST) && is_string($_POST['newpass']) ? strip_tags(trim($_POST['newpass'])) : null;
@@ -14,26 +14,24 @@ if (isset($_POST['submit'])) {
 
     $username_exist = $checkuser->rowCount();
 
-    $message = null;
-
     if($username_exist > 0){
-        $message .= "<div>I'm sorry but the username you chose has already been taken.  Please pick another one.</div>";
+        $message[] = "<div>I'm sorry but the username you chose has already been taken.  Please pick another one.</div>";
     }
     if(strlen($username) < 4 or strlen($username) > 20){
-        $message .= "<div>The username you chose has " . strlen($username) . " characters. You need to have between 4 and 20 characters.</div>";
+        $message[] = "<div>The username you chose has " . strlen($username) . " characters. You need to have between 4 and 20 characters.</div>";
     }
     if(strlen($password) < 4 or strlen($username) > 20){
-        $message .= "<div>The password you chose has " . strlen($password) . " characters. You need to have between 4 and 20 characters.</div>";
+        $message[] = "<div>The password you chose has " . strlen($password) . " characters. You need to have between 4 and 20 characters.</div>";
     }
     if($password != $password2){
-        $message .= "<div>Your passwords don't match. Please try again.</div>";
+        $message[] = "<div>Your passwords don't match. Please try again.</div>";
     }
     if (empty($email)) {
-			  $message .= 'You didn\'t enter a valid email address';
+			  $message[] = 'You didn\'t enter a valid email address';
 		}	
 
     //insert the values
-    if (!isset($message)){
+    if (!count($message)){
       $password = password_hash($password, PASSWORD_BCRYPT);
         DB::insert('grpgusers', ['ip' => $_SERVER['REMOTE_ADDR'], 'username' => $username, 'password' => $password, 'email' => $email, 'signuptime' => $signuptime, 'lastactive' => $signuptime]);
         echo Message('Your account has been created successfully! Redirecting to login page in 5 seconds. <meta http-equiv="refresh" content="5;url=index.php">');
@@ -45,12 +43,6 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<?php
-if (isset($message)) {
-    echo Message($message);
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -100,6 +92,12 @@ if (isset($message)) {
 </nav>
 	<div class="container-fluid">
     	<div class="main_logo"><a href="home.php"><img src="images/mobile-logo.png"></a></div><!--main_logo-->
+  <?php 
+  if(count($message))
+  {
+    echo '<div class="alert alert-warning text-center">'.implode('<br />', $message) .' </div>';
+  }
+  ?>
         <div class="row">
         	<div class="col-md-6">
             	<div class="login_box">
@@ -126,7 +124,8 @@ if (isset($message)) {
             <!--login_field-->
                     
         
-  
+                
+            
                 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
